@@ -15,7 +15,7 @@ import VideosdkRPK from "./VideosdkRPK";
 import { createMeeting } from "./api/api";
 import ToggleScreenShare from "./toggleScreenShare";
 
-export default function ScreenSharingWrapper(props: any) {
+export default function ScreenSharingWrapper(props) {
     const [isMeetingJoined, setIsMeetingJoined] = useState(false);
     const [meetingId, setMeetingId] = useState('');
 
@@ -26,7 +26,7 @@ export default function ScreenSharingWrapper(props: any) {
         enableScreenShare,
         disableScreenShare
     } = useMeeting({
-        onError: (data: any) => {
+        onError: (data) => {
             const { code, message } = data;
             console.log(`Error useMeeting: ${code}: ${message}`);
         },

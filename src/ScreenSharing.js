@@ -2,52 +2,14 @@ import React from "react";
 
 // Customizable Area Start
 import {
-  SafeAreaView,
-  Dimensions,
-  PixelRatio,
   View,
-  Text,
-  FlatList,
-  SectionList,
   StyleSheet,
-  Button,
-  TouchableOpacity,
-  CheckBox,
-  Switch,
   Platform,
-  Image,
-  TextInput,
-  Picker,
-  ActivityIndicator,
-  Alert,
-  ImageBackground,
-  ScrollView,
-  TouchableWithoutFeedback,
-  KeyboardAvoidingView,
 } from "react-native";
-import {
-  responsiveHeight,
-  responsiveWidth,
-  responsiveFontSize,
-} from "react-native-responsive-dimensions";
-import { TabView, SceneMap, TabBar } from "react-native-tab-view";
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-} from "react-native-simple-radio-button";
-import MergeEngineUtilities from "../../utilities/src/MergeEngineUtilities";
 
-import {
-  MeetingConsumer,
-  MeetingProvider,
-  useMeeting
-} from "@videosdk.live/react-native-sdk";
-import ToggleScreenShare from "./toggleScreenShare";
-import { createMeeting } from "./api/api";
 import ScreenShareWrapper from "./ScreenShareWrapper";
 
 //@ts-ignore
-import CustomCheckBox from "../../../components/src/CustomCheckBox";
 
 // Merge Engine - import assets - Start
 // Merge Engine - import assets - End
@@ -60,22 +22,12 @@ let artBoardWidthOrg = 375;
 
 import ScreenSharingController, {
   Props,
-  configJSON,
 } from "./ScreenSharingController";
 
 export default class ScreenSharing extends ScreenSharingController {
-  constructor(props: Props) {
+  constructor(props) {
     super(props);
     // Customizable Area Start
-    Dimensions.addEventListener("change", (e) => {
-      MergeEngineUtilities.init(
-        artBoardHeightOrg,
-        artBoardWidthOrg,
-        Dimensions.get("window").height,
-        Dimensions.get("window").width
-      );
-      this.forceUpdate();
-    });
     // Customizable Area End
   }
 
@@ -95,12 +47,10 @@ export default class ScreenSharing extends ScreenSharingController {
     console.log("Screen Share data roomID", this.state.meetingId);
 
     return (
-      <ScrollView keyboardShouldPersistTaps="always" style={styles.container}>
-        <View style={styles.btnContainer}>
-          {/* NOT WORKING */}
-          <ScreenShareWrapper props={this.state} />
-        </View>
-      </ScrollView>
+      <View style={styles.btnContainer}>
+        {/* NOT WORKING */}
+        <ScreenShareWrapper props={this.state} />
+      </View>
     );
     // Merge Engine - render - End
     // Customizable Area End
