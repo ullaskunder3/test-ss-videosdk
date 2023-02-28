@@ -5,8 +5,15 @@ import {
   View,
   StyleSheet,
   Platform,
+  Text
 } from "react-native";
 
+import {
+  MeetingProvider,
+  MeetingConsumer,
+  useMeeting,
+} from "@videosdk.live/react-native-sdk";
+import ToggleScreenShare from "./toggleScreenShare"
 // import ScreenShareWrapper from "./ScreenShareWrapper";
 
 //@ts-ignore

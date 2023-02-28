@@ -37,7 +37,7 @@ export default class ScreenSharingController extends React.Component{
 
   async componentDidMount(){
     const {token} = this.state
-    const meetId = await createMeeting(token)
+    const meetId = await createMeeting(this.state)
     console.log("meetID on component did mount", meetId);
     
     this.setState({

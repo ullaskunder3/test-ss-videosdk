@@ -1,32 +1,21 @@
 import { Alert } from "react-native"
 // @ts-ignore
 const API_BASE_URL: string = "https://api.videosdk.live/v2"
-const VIDEOSDK_TOKEN: string | null = null
 
-export const createMeeting = async ({ token }: { token: string }) => {
-  const url = `${API_BASE_URL}/rooms`
-  const options = {
+// API call to create meeting
+export const createMeeting = async ({ token }) => {
+  const res = await fetch(`https://api.videosdk.live/v2/rooms`, {
     method: "POST",
-    headers: { Authorization: token, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      token: token,
-    }),
-  }
+    headers: {
+      authorization: `${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({}),
+  });
 
-  try {
-    const res = await fetch(url, options)
-      .then((response) => response.json())
-      .catch((error) =>  Alert.alert("error", error))
-    if (res.statusCode === 401) {
-      Alert.alert(JSON.stringify(res.error))
-    }
-    console.log("meeting ID", res);
-    
-    return res.roomId
-  } catch (error: any) {
-    Alert.alert(JSON.stringify(error))
-  }
-}
+  const { roomId } = await res.json();
+  return roomId;
+};
 
 export const validateMeeting = async ({
   meetingId,
