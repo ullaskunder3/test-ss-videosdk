@@ -12,11 +12,29 @@ import {
 } from "@videosdk.live/react-native-sdk";
 import VideosdkRPK from "./VideosdkRPK";
 
-export default function ToggleScreenShare({meetingId, enableScreenShare, disableScreenShare, toggleScreenShare, isMeetingJoined, localScreenShareOn}) {
+export default function ToggleScreenShare() {
+  const [isMeetingJoined, setIsMeetingJoined] = useState(false);
+
+  const {
+    localScreenShareOn,
+    toggleScreenShare,
+    enableScreenShare,
+    disableScreenShare,
+    meetingId,
+    join
+  } = useMeeting({
+    onError: (data) => {
+      const { code, message } = data;
+      console.log(`Error useMeeting: ${code}: ${message}`);
+    },
+    onMeetingJoined: () => {
+      setIsMeetingJoined(true);
+    }
+  });
 
   useEffect(() => {
     if (Platform.OS == "ios") {
-      VideosdkRPK.addListener("onScreenShare", (event: any) => {
+      VideosdkRPK.addListener("onScreenShare", (event) => {
         if (event === "START_BROADCAST") {
           enableScreenShare();
         } else if (event === "STOP_BROADCAST") {
@@ -33,15 +51,23 @@ export default function ToggleScreenShare({meetingId, enableScreenShare, disable
   const toggleScreenshareOnMeetingJoined = () => {
     console.log("triggered", isMeetingJoined);
     // onPress
-    if (meetingId) {
+    if (isMeetingJoined) {
       toggleScreenShare();
     }
   };
+  const joinCall = () => {
+    join()
+    setIsMeetingJoined(!isMeetingJoined)
+  }
 
   return (
     <View style={styles.container}>
       <Text>{meetingId ? meetingId : "meeting Id Unavailable"}</Text>
       <Text>{isMeetingJoined ? "Joined" : "Not Joined"}</Text>
+
+      <TouchableOpacity style={styles.btn} onPress={joinCall}>
+        <Text style={styles.TextColor}>Join Call</Text>
+      </TouchableOpacity>
 
       <TouchableOpacity style={styles.btn} onPress={toggleScreenshareOnMeetingJoined}>
         <Text style={styles.TextColor}>{`${localScreenShareOn ? "Stop" : "Start"} Screen Share`}</Text>

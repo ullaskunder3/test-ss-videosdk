@@ -7,7 +7,7 @@ import {
   Platform,
 } from "react-native";
 
-import ScreenShareWrapper from "./ScreenShareWrapper";
+// import ScreenShareWrapper from "./ScreenShareWrapper";
 
 //@ts-ignore
 
@@ -47,10 +47,36 @@ export default class ScreenSharing extends ScreenSharingController {
     console.log("Screen Share data roomID", this.state.meetingId);
 
     return (
-      <View style={styles.btnContainer}>
-        {/* NOT WORKING */}
-        <ScreenShareWrapper props={this.state} />
-      </View>
+        <View style={styles.btnContainer}>
+          {/* NOT WORKING */}
+          {
+            this.state.meetingId ? (
+              <MeetingProvider
+                config={{
+                  meetingId: this.state.meetingId,
+                  micEnabled: this.state.micEnabled,
+                  webcamEnabled: this.state.webcamEnabled,
+                  name: "test",
+                  notification: {
+                    title: "Video SDK Meeting Started",
+                    message: "Meeting is running...",
+                  },
+                }}
+                token={this.state.token}
+              >
+                <MeetingConsumer>
+                  {() => {
+                    return (
+                      <ToggleScreenShare />
+                    );
+                  }}
+                </MeetingConsumer>
+              </MeetingProvider>
+            ) : (<View>
+              <Text>No MeetingId</Text>
+            </View>)
+          }
+        </View>
     );
     // Merge Engine - render - End
     // Customizable Area End
