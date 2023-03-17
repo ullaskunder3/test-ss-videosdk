@@ -24,7 +24,7 @@ export default class ScreenSharingController extends React.Component{
       meetingId: "",
       micEnabled: true,
       webcamEnabled: true,
-      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiI0ZGEzMDJiNi0zOWExLTQwMGQtOWRiMS0zYjdiZjkyMjZjMGYiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTY3NzU2NDkwMCwiZXhwIjoxNjc4MTY5NzAwfQ.3Cc2oXSVynfjGXVtzOIYP4p16quYiQg8TknLl8Fqs9Q",
+      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiI0ZGEzMDJiNi0zOWExLTQwMGQtOWRiMS0zYjdiZjkyMjZjMGYiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTY3ODg1OTA1MywiZXhwIjoxNjg2NjM1MDUzfQ.sjyDlx_3RzBONHICsXIJF59Zv3ZUigerK6roxj17E_k",
       roomId: "",
       isRoomValidated: "",
       isMeetingJoined: false,

@@ -3,29 +3,10 @@ import React from "react";
 // Customizable Area Start
 import {
   View,
-  StyleSheet,
-  Platform,
-  Text
+  StyleSheet
 } from "react-native";
 
-import {
-  MeetingProvider,
-  MeetingConsumer,
-  useMeeting,
-} from "@videosdk.live/react-native-sdk";
-import ToggleScreenShare from "./toggleScreenShare"
-// import ScreenShareWrapper from "./ScreenShareWrapper";
-
-//@ts-ignore
-
-// Merge Engine - import assets - Start
-// Merge Engine - import assets - End
-
-// Merge Engine - Artboard Dimension  - Start
-let artBoardHeightOrg = 667;
-let artBoardWidthOrg = 375;
-// Merge Engine - Artboard Dimension  - End
-// Customizable Area End
+import MeetScreen from "./MeetScreen";
 
 import ScreenSharingController, {
   Props,
@@ -38,59 +19,15 @@ export default class ScreenSharing extends ScreenSharingController {
     // Customizable Area End
   }
 
-  // Customizable Area Start
-  // async getMeetId() {
-  //   const meetId = await createMeeting(this.state)
-  //   this.setState({
-  //     meetingId: meetId
-  //   })
-  // }
-  // Customizable Area End
-
   render() {
-    // Customizable Area Start
-    // Merge Engine - render - Start
-    console.log("Screen Share data token", this.state.token);
-    console.log("Screen Share data roomID", this.state.meetingId);
 
     return (
-        <View style={styles.btnContainer}>
-          {/* NOT WORKING */}
-          {
-            this.state.meetingId ? (
-              <MeetingProvider
-                config={{
-                  meetingId: this.state.meetingId,
-                  micEnabled: this.state.micEnabled,
-                  webcamEnabled: this.state.webcamEnabled,
-                  name: "test",
-                  notification: {
-                    title: "Video SDK Meeting Started",
-                    message: "Meeting is running...",
-                  },
-                }}
-                token={this.state.token}
-              >
-                <MeetingConsumer>
-                  {() => {
-                    return (
-                      <ToggleScreenShare />
-                    );
-                  }}
-                </MeetingConsumer>
-              </MeetingProvider>
-            ) : (<View>
-              <Text>No MeetingId</Text>
-            </View>)
-          }
-        </View>
+      <View style={styles.container}>
+        <MeetScreen state={this.state} />
+      </View>
     );
-    // Merge Engine - render - End
-    // Customizable Area End
   }
 }
-
-// Customizable Area Start
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -99,40 +36,8 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     width: Platform.OS === "web" ? "75%" : "100%",
     maxWidth: 650,
-    backgroundColor: "#ffffffff",
+    backgroundColor: "#000",
+    height: "100%",
+    justifyContent: "center"
   },
-  btnContainer: {
-    justifyContent: "space-between",
-    flexDirection: "row"
-  },
-  title: {
-    marginBottom: 32,
-    fontSize: 16,
-    textAlign: "left",
-    marginVertical: 8,
-  },
-  body: {
-    marginBottom: 32,
-    fontSize: 16,
-    textAlign: "left",
-    marginVertical: 8,
-  },
-  bgPasswordContainer: {
-    flexDirection: "row",
-    backgroundColor: "#00000000",
-    marginBottom: 16,
-    borderBottomWidth: 1,
-    borderColor: "#767676",
-    borderRadius: 2,
-    padding: 10,
-    borderWidth: Platform.OS === "web" ? 0 : 1,
-  },
-  bgMobileInput: {
-    flex: 1,
-  },
-  showHide: {
-    alignSelf: "center",
-  },
-  imgShowhide: Platform.OS === "web" ? { height: 30, width: 30 } : {},
 });
-// Customizable Area End
