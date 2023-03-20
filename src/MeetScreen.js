@@ -158,13 +158,15 @@ function ParticipantView({ participantId }) {
                     marginVertical: 12,
                 }}
             >
-                {presenterId && !localScreenShareOn ? (
+                {presenterId && !localScreenShareOn && participantId !== presenterId ? (
                     <RemoteParticipantPresenter presenterId={presenterId} />
-                ) : presenterId && localScreenShareOn ? (
+                ) : presenterId && localScreenShareOn && participantId !== presenterId ? (
                     <LocalParticipantPresenter />
-                ) : <View>
-                    <Text style={{ color: "white" }}>No SCREEN SHARE STREAM</Text>
-                </View>}
+                ) : (
+                    <View>
+                        <Text style={{ color: "white" }}>No SCREEN SHARE STREAM</Text>
+                    </View>
+                )}
             </View>
         </>
     )

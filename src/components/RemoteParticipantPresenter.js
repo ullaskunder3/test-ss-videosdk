@@ -23,14 +23,21 @@ export default function RemoteParticipantPresenter({ presenterId }) {
       }}
     >
       {screenShareOn && screenShareStream ? (
-        <RTCView
-          streamURL={new MediaStream([screenShareStream.track]).toURL()}
-          objectFit={"contain"}
+        <View
           style={{
-            flex: 1,
+            width: 300,
+            height: 300
           }}
-        />
-      ) : null}
+        >
+          <RTCView
+            streamURL={new MediaStream([screenShareStream.track]).toURL()}
+            objectFit={"contain"}
+            style={{
+              flex: 3,
+            }}
+          />
+        </View>
+      ) : <View><Text>ScreeShare not working</Text></View>}
       <View
         style={{
           flexDirection: "row",
